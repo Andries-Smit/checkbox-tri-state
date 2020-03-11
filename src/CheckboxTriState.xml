@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<widget id="com.mansystems.web.checkboxtristate.CheckboxTriState" pluginWidget="true" needsEntityContext="true" offlineCapable="true"
+        supportedPlatform="Web"
+        xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../node_modules/mendix/custom_widget.xsd">
+    <name>Checkbox Tri State</name>
+    <description>Boolean checkbox with interminate state</description>
+    <icon/>
+    <properties>
+        <propertyGroup caption="General">
+            <propertyGroup caption="Data source">
+                <property key="attribute" type="attribute" onChange="onChangeAction" required="true">
+                    <caption>Attribute (path)</caption>
+                    <description/>
+                    <attributeTypes>
+                        <attributeType name="Enum" />
+                    </attributeTypes>
+                </property>
+            </propertyGroup>
+            <propertyGroup caption="Label">
+                <systemProperty key="Label" />
+                <property key="labelCaption" type="textTemplate" required="false">
+                    <caption>Label caption after</caption>
+                    <description/>
+                </property>
+            </propertyGroup>
+            <propertyGroup caption="Editablility">
+                <systemProperty key="Editability"/>
+            </propertyGroup>
+            <propertyGroup caption="Visibility">
+                <systemProperty key="Visibility"/>
+            </propertyGroup>
+        </propertyGroup>
+        <propertyGroup caption="Common">
+            <propertyGroup caption="Common">
+                <systemProperty key="Name"/>
+                <systemProperty key="TabIndex"/>
+            </propertyGroup>
+        </propertyGroup>
+        <propertyGroup caption="Events">
+            <propertyGroup caption="Events">
+                <property key="onChangeAction" type="action" required="false">
+                    <caption>On change</caption>
+                    <description/>
+                </property>
+                <property key="onEnterAction" type="action" required="false">
+                    <caption>On enter</caption>
+                    <description/>
+                </property>
+                <property key="onLeaveAction" type="action" required="false">
+                    <caption>On leave</caption>
+                    <description/>
+                </property>
+            </propertyGroup>
+        </propertyGroup>
+    </properties>
+</widget>
