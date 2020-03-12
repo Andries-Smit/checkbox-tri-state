@@ -1,4 +1,12 @@
-import { ChangeEvent, Component, Fragment, ReactNode, createElement } from "react";
+import {
+    ChangeEvent,
+    Component,
+    Fragment,
+    ReactNode,
+    DetailedHTMLProps,
+    InputHTMLAttributes,
+    createElement
+} from "react";
 
 export type CheckState = "checked" | "unchecked" | "partial";
 export interface CheckboxProps {
@@ -44,7 +52,9 @@ export class Checkbox extends Component<CheckboxProps> {
         );
     }
 
-    private accessibilityProps() {
+    private accessibilityProps():
+        | DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>
+        | undefined {
         if (this.props.validation) {
             return {
                 "aria-invalid": true,
@@ -53,7 +63,7 @@ export class Checkbox extends Component<CheckboxProps> {
         }
     }
 
-    private getValidation() {
+    private getValidation(): ReactNode {
         if (this.props.validation) {
             return (
                 <div
@@ -68,7 +78,7 @@ export class Checkbox extends Component<CheckboxProps> {
         return null;
     }
 
-    private getLabel() {
+    private getLabel(): ReactNode {
         if (this.props.label) {
             return (
                 <label className="control-label" htmlFor={(this.props as any).id}>
@@ -81,14 +91,20 @@ export class Checkbox extends Component<CheckboxProps> {
 
     private onChange(event: ChangeEvent<HTMLInputElement>): void {
         const value: CheckState = event.target.checked ? "checked" : "unchecked";
-        this.props.onChange && this.props.onChange(value);
+        if (this.props.onChange) {
+            this.props.onChange(value);
+        }
     }
 
     private onFocus(): void {
-        this.props.onFocus && this.props.onFocus();
+        if (this.props.onFocus) {
+            this.props.onFocus();
+        }
     }
 
     private onBlur(): void {
-        this.props.onBlur && this.props.onBlur();
+        if (this.props.onBlur) {
+            this.props.onBlur();
+        }
     }
 }

@@ -34,11 +34,11 @@ class CheckboxTriState extends Component<CheckboxTriStateContainerProps> {
         this.props.attribute.setValue(value);
     }
 
-    private onEnterChange() {
+    private onEnterChange(): void {
         this.executeAction(this.props.onEnterAction);
     }
 
-    private onLeaveChange() {
+    private onLeaveChange(): void {
         this.executeAction(this.props.onLeaveAction);
     }
 

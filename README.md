@@ -1,13 +1,13 @@
 ## Checkbox Tri State
 
-Boolean checkbox with intermediate state.
+Checkbox with three states; checked, unchecked and mixed.
 
 ## Features
 
 An easy way to select and deselect a set of boolean attributes. And allowing you to indicated when only some of the
 underling attributes are selected.
 
--   CSS styled checkbox, matching the core checkbox.
+-   CSS styled checkbox, matching the standard checkbox.
 -   Intermediated or mixed state, to indicated partial selected options.
 -   Click on mixed state checkbox will change the value to checked.
 -   Used on enumeration.
