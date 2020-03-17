@@ -1,7 +1,7 @@
 {
     "name": "checkbox-tri-state",
     "widgetName": "CheckboxTriState",
-    "version": "0.0.1",
+    "version": "1.0.0",
     "description": "Checkbox with intermediate state",
     "copyright": "2020 Mansystems",
     "author": "Andries Smit",
