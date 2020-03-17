@@ -18,7 +18,10 @@ underling attributes are selected.
 -   Place widget in a data view
 -   Create a enumeration attribute, to identify the three states; `checked`, `unchecked`, `mixed`
 -   In the `Checkbox Tri State` widget;
-    -   Select the enumeration attribute
+    -   Select the enumeration attribute, the enumeration should have values with the name:
+        - For checked; "checked", "_true" or "true".
+        - For unchecked; "unchecked", "_false" or "false".
+        - For mixed; "mixed", "partial", "some" or "indeterminate".
     -   Add an On change event nanoflow to update the state of the boolean attributes
 -   In the correlated boolean widgets, add an On change event nanoflow to update set the mixed state
     `Checkbox Tri State` widgets enumeration attribute.
