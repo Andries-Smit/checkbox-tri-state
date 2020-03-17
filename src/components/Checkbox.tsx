@@ -8,7 +8,7 @@ import {
     createElement
 } from "react";
 
-export type CheckState = "checked" | "unchecked" | "partial";
+export type CheckState = "checked" | "unchecked" | "mixed";
 export interface CheckboxProps {
     value: CheckState;
     disabled?: boolean;
@@ -27,7 +27,7 @@ export class Checkbox extends Component<CheckboxProps> {
 
     render(): ReactNode {
         const checked = this.props.value === "checked";
-        const indeterminate = this.props.value === "partial";
+        const indeterminate = this.props.value === "mixed";
         const ariaChecked =
             this.props.value === "checked" ? "true" : this.props.value === "unchecked" ? "false" : "mixed";
         return (

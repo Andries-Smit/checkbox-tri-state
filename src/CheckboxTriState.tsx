@@ -43,9 +43,9 @@ class CheckboxTriState extends Component<CheckboxTriStateContainerProps> {
     }
 
     private getValue(attribute: EditableValue<string>): CheckState {
-        const checked = ["checked", "_true", "true"];
-        const unchecked = ["unchecked", "_false", "false"];
-        const partial = ["partial", "mixed", "some", "indeterminate"];
+        const checked = ["checked", "_true", "true", "all"];
+        const unchecked = ["unchecked", "_false", "false", "none"];
+        const mixed = ["mixed", "partial", "some", "indeterminate"];
         const value = attribute.status === ValueStatus.Available ? String(attribute.value).toLowerCase() : undefined;
         if (!value) {
             return "unchecked";
@@ -56,8 +56,8 @@ class CheckboxTriState extends Component<CheckboxTriStateContainerProps> {
         if (unchecked.indexOf(value) !== -1) {
             return "unchecked";
         }
-        if (partial.indexOf(value) !== -1) {
-            return "partial";
+        if (mixed.indexOf(value) !== -1) {
+            return "mixed";
         }
         return "unchecked";
     }
