@@ -1,0 +1,52 @@
+// Based on Mendix 8.6
+// theme\styles\web\sass\core\widgets\_checkbox.scss
+
+@import "_variables";
+
+input[type="checkbox"] {
+    &:indeterminate::-ms-check {
+        color: $form-input-border-focus-color;
+        border-color: $form-input-border-focus-color;
+        background-color: $form-input-bg-focus;
+    }
+
+    &:indeterminate:after {
+        // Checkmark
+        width: 8px;
+        height: 2px;
+        margin: 7px 4px;
+        transform: rotate(0deg);
+        pointer-events: none;
+        border: 2px solid #ffffff;
+        border-top: 0;
+        border-right: 0;
+    }
+
+    &:not(:disabled):not(:indeterminate):hover:after {
+        content: "";
+        border-color: $form-input-bg-hover; // color of checkmark on hover
+    }
+
+    &:indeterminate:before {
+        border-color: $form-input-border-focus-color;
+        background-color: $form-input-border-focus-color;
+    }
+
+    &:indeterminate:after {
+        content: "";
+    }
+
+    &:disabled:before {
+        background-color: $form-input-bg-disabled;
+    }
+
+    &:indeterminate:disabled:before {
+        border-color: transparent;
+        background-color: rgba($form-input-border-focus-color, 0.4);
+    }
+
+    &:disabled:after,
+    &:indeterminate:disabled:after {
+        border-color: $form-input-bg-disabled;
+    }
+}
