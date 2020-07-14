@@ -120,5 +120,5 @@ jobs:
       with:
         upload_url: ${{ steps.get_release.outputs.upload_url }}
         asset_path: ./dist/${{ steps.package_version.outputs.value }}/${{ steps.package_packagePath.outputs.value }}.${{ steps.package_widgetName.outputs.value }}.mpk
-        asset_name: ${{ steps.package_version.outputs.value }}/${{ steps.package_packagePath.outputs.value }}.${{ steps.package_widgetName.outputs.value }}.mpk
+        asset_name: ${{ steps.package_packagePath.outputs.value }}.${{ steps.package_widgetName.outputs.value }}.mpk
         asset_content_type: application/zip
