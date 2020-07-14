@@ -14,6 +14,8 @@ underling attributes are selected.
 -   Accessible with key navigation and screen readers.
 -   The change of the checkbox does only effect the enumerattion attribute and does not automatically reflect to its dependents, it requires an `On change` action.
 
+When Mendix 8.12 has support for editable data source we can add more flexibilty to this widget.
+
 ## Usage
 
 -   Place the widget in a context, for example a data view or a list view
