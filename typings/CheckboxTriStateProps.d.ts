@@ -5,7 +5,7 @@
  */
 import { CSSProperties } from "react";
 import { ActionPreview } from "@mendix/pluggable-widgets-typing-generator/dist/typings";
-import { ActionValue, DynamicValue, EditableValue } from "mendix";
+import { ActionValue, DynamicValue, EditableValue, ListValue, ObjectItem } from "mendix";
 
 interface CommonProps {
     name: string;
@@ -14,8 +14,26 @@ interface CommonProps {
     tabIndex: number;
 }
 
+export type SourceTypeEnum = "context" | "dataSource" | "enum";
+
+export interface AttributeListType {
+    attributeCtxBool: EditableValue<boolean>;
+}
+
+export interface AttributeListPreviewType {
+    attributeCtxBool: string;
+}
+
+export interface AttributeListVisibilityType {
+    attributeCtxBool: boolean;
+}
+
 export interface CheckboxTriStateContainerProps extends CommonProps {
-    attribute: EditableValue<string>;
+    sourceType: SourceTypeEnum;
+    attributeList: AttributeListType[];
+    attributeDS?: ListValue;
+    attributeDsBool?: (item: ObjectItem) => EditableValue<boolean>;
+    attributeEnum?: EditableValue<string>;
     labelCaption?: DynamicValue<string>;
     onChangeAction?: ActionValue;
     onEnterAction?: ActionValue;
@@ -26,7 +44,11 @@ export interface CheckboxTriStatePreviewProps {
     class: string;
     style: string;
     styleObject: CSSProperties;
-    attribute: string;
+    sourceType: SourceTypeEnum;
+    attributeList: AttributeListPreviewType[];
+    attributeDS?: ListValue;
+    attributeDsBool?: (item: { type: string }) => string;
+    attributeEnum?: string;
     labelCaption?: string;
     onChangeAction?: ActionPreview;
     onEnterAction?: ActionPreview;
@@ -34,7 +56,11 @@ export interface CheckboxTriStatePreviewProps {
 }
 
 export interface VisibilityMap {
-    attribute: boolean;
+    sourceType: boolean;
+    attributeList: AttributeListVisibilityType[] | boolean;
+    attributeDS: boolean;
+    attributeDsBool: boolean;
+    attributeEnum: boolean;
     labelCaption: boolean;
     onChangeAction: boolean;
     onEnterAction: boolean;

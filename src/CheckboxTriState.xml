@@ -9,11 +9,46 @@
     <properties>
         <propertyGroup caption="General">
             <propertyGroup caption="Data source">
-                <property key="attribute" type="attribute" onChange="onChangeAction" required="true">
+                <property key="sourceType" type="enumeration" defaultValue="context">
+                    <caption>Source type</caption>
+                    <description/>
+                    <enumerationValues>
+                        <enumerationValue key="context">Context</enumerationValue>
+                        <enumerationValue key="dataSource">Date Source</enumerationValue>
+                        <enumerationValue key="enum">Enumeration</enumerationValue>
+                    </enumerationValues>
+                </property>
+                <property key="attributeList" type="object" isList="true" required="false">
+                    <caption>Attributes</caption>
+                    <description/>
+                    <properties>
+                        <propertyGroup caption="Attribute">
+                            <property key="attributeCtxBool" type="attribute" required="true">
+                                <caption>Attribute (path)</caption>
+                                <description/>
+                                <attributeTypes>
+                                    <attributeType name="Boolean" />
+                                </attributeTypes>
+                            </property>
+                        </propertyGroup>
+                    </properties>
+                </property>
+                <property key="attributeDS" type="datasource" isList="true" required="false">
+                    <caption>Data source</caption>
+                    <description/>
+                </property>
+                <property key="attributeDsBool" type="attribute" dataSource="attributeDS" required="false">
                     <caption>Attribute (path)</caption>
                     <description/>
                     <attributeTypes>
-                        <attributeType name="Enum" />
+                        <attributeType name="Boolean"/>
+                    </attributeTypes>
+                </property>
+                <property key="attributeEnum" type="attribute" required="false">
+                    <caption>Attribute (path)</caption>
+                    <description/>
+                    <attributeTypes>
+                        <attributeType name="Enum"/>
                     </attributeTypes>
                 </property>
             </propertyGroup>
