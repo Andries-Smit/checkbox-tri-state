@@ -1,0 +1,124 @@
+name: Build, test and release with tag
+
+on: push
+
+env:
+  GITHUB_TOKEN: ${{ github.token }}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+
+    # - name: Use chrome driver
+    #   uses: nanasess/setup-chromedriver@master
+
+    # - name: Set chrome driver
+    #   run: |
+    #    echo "Check release   ${{ github.ref }} ${{ contains(github.ref, '/tags/') }}"
+    #    export DISPLAY=:99
+    #    chromedriver --url-base=/wd/hub &
+    #    sudo Xvfb -ac :99 -screen 0 1280x1024x24 > /dev/null 2>&1 & # optional
+
+    - name: Use checkout
+      uses: actions/checkout@v2
+
+    - name: Use Node
+      uses: actions/setup-node@v1
+      with:
+        node-version: '12.x'
+
+    - name: Cache node modules
+      uses: actions/cache@v2
+      env:
+        cache-name: cache-node-modules
+      with:
+        path: ~/.npm
+        key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+        restore-keys: |
+          ${{ runner.os }}-build-${{ env.cache-name }}-
+          ${{ runner.os }}-build-
+          ${{ runner.os }}-
+
+    - name: Read package widget name
+      id: package_widgetName
+      uses: ashley-taylor/read-json-property-action@v1.0
+      with:
+        path: ./package.json
+        property: widgetName
+
+    - name: Read package version
+      id: package_version
+      uses: ashley-taylor/read-json-property-action@v1.0
+      with:
+        path: ./package.json
+        property: version
+
+    - name: Read package widget path
+      id: package_packagePath
+      uses: ashley-taylor/read-json-property-action@v1.0
+      with:
+        path: ./package.json
+        property: packagePath
+    
+    - name: Echo widget and version
+      run: echo ${{ steps.package_packagePath.outputs.value }}.${{ steps.package_widgetName.outputs.value }} @ ${{ steps.package_version.outputs.value }}
+
+    - name: Install Dependencies
+      run: npm install
+
+    - name: Lint
+      run: npm run lint
+  
+    - name: Build
+      run: npm run build
+
+    - name: Development build artifacts
+      uses: actions/upload-artifact@v1
+      with:
+        name: development_build
+        path: dist/${{ steps.package_version.outputs.value }}/${{ steps.package_packagePath.outputs.value }}.${{ steps.package_widgetName.outputs.value }}.mpk
+
+    # - name: Run unit test
+    #   run: npm run test:unit
+    
+    # - name: Code coverage artifacts
+    #   uses: actions/upload-artifact@v1
+    #   with:
+    #     name: coverage_report
+    #     path: dist/coverage
+
+    # - name: Run end 2 end test
+    #   run: npm run test:e2e
+
+    # - name: Screenshots E2E artifacts
+    #   if: ${{ contains(github.ref, '/tags/') }}
+    #   uses: actions/upload-artifact@v1
+    #   with:
+    #     name: e2e_screenshots_failed_test
+    #     path: dist/e2e
+
+    - name: Build release
+      if: ${{ contains(github.ref, '/tags/') }}
+      run: npm run release
+
+    - name: Production build artifacts
+      if: ${{ contains(github.ref, '/tags/') }}
+      uses: actions/upload-artifact@v1
+      with:
+        name: development_build
+        path: dist/${{ steps.package_version.outputs.value }}/${{ steps.package_packagePath.outputs.value }}.${{ steps.package_widgetName.outputs.value }}.mpk
+
+    - name: Get Release
+      if: ${{ contains(github.ref, '/tags/') }}
+      id: get_release
+      uses: bruceadams/get-release@v1.2.0
+    
+    - name: Upload Release Asset
+      if: ${{ contains(github.ref, '/tags/') }}
+      uses: actions/upload-release-asset@v1
+      with:
+        upload_url: ${{ steps.get_release.outputs.upload_url }}
+        asset_path: ./dist/${{ steps.package_version.outputs.value }}/${{ steps.package_packagePath.outputs.value }}.${{ steps.package_widgetName.outputs.value }}.mpk
+        asset_name: ${{ steps.package_version.outputs.value }}/${{ steps.package_packagePath.outputs.value }}.${{ steps.package_widgetName.outputs.value }}.mpk
+        asset_content_type: application/zip
