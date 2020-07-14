@@ -12,9 +12,9 @@ underling attributes are selected.
 -   Click on mixed state checkbox will change the value to checked.
 -   Use enumeration a data source.
 -   Accessible with key navigation and screen readers.
--   The change of the checkbox does only effect the enumerattion attribute and does not automatically reflect to its dependents, it requires an `On change` action.
+-   The change of the checkbox does only effect the enumeration attribute and does not automatically reflect to its dependents, it requires an `On change` action.
 
-When Mendix 8.12 has support for editable data source we can add more flexibilty to this widget.
+When Mendix 8.12 has support for editable data source we can add more flexibility to this widget.
 
 ## Usage
 
