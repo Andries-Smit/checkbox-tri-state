@@ -15,6 +15,7 @@ export interface CheckboxProps {
     id?: string;
     validation?: string;
     label?: string;
+    tabIndex?: number;
     onChange?: (value: CheckState) => void;
     onFocus?: () => void;
     onBlur?: () => void;
@@ -39,6 +40,7 @@ export class Checkbox extends Component<CheckboxProps> {
                     disabled={this.props.disabled}
                     value="checkboxValue"
                     checked={checked}
+                    tabIndex={this.props.tabIndex}
                     ref={el => el && (el.indeterminate = indeterminate)}
                     onChange={this.onChangeHandler}
                     onFocus={this.onFocusHandler}

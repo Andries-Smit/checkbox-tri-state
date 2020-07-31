@@ -3,7 +3,7 @@
 
 @import "_variables";
 
-input[type="checkbox"] {
+input[type="checkbox"].mx-widget-checkbox-tri-state {
     &:indeterminate::-ms-check {
         color: $form-input-border-focus-color;
         border-color: $form-input-border-focus-color;

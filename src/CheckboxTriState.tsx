@@ -14,24 +14,36 @@ class CheckboxTriState extends Component<CheckboxTriStateContainerProps> {
     render(): ReactNode {
         return (
             <Checkbox
-                value={this.getValue(this.props.attribute)}
+                value={this.getValue(this.props.attributePath)}
                 onChange={this.onChangeHandler}
+                tabIndex={this.props.tabIndex}
                 id={(this.props as any).id}
-                disabled={this.props.attribute.readOnly}
+                disabled={this.disabled()}
                 label={
                     this.props.labelCaption?.status === ValueStatus.Available
                         ? this.props.labelCaption.value
                         : undefined
                 }
-                validation={this.props.attribute.validation}
+                validation={this.props.attributePath.validation}
                 onFocus={this.onEnterHandler}
                 onBlur={this.onLeaveHandler}
             />
         );
     }
 
+    private disabled(): boolean {
+        if (this.props.editabilityOverwrite === "default") {
+            return this.props.attributePath.readOnly;
+        }
+        return false;
+    }
+
     private onChange(value: CheckState): void {
-        this.props.attribute.setValue(value);
+        if (!this.props.attributePath.readOnly) {
+            this.props.attributePath.setValue(value);
+        } else if (this.props.editabilityOverwrite === "always") {
+            this.executeAction(this.props.onChangeActionOverwrite);
+        }
     }
 
     private onEnterChange(): void {
@@ -42,7 +54,7 @@ class CheckboxTriState extends Component<CheckboxTriStateContainerProps> {
         this.executeAction(this.props.onLeaveAction);
     }
 
-    private getValue(attribute: EditableValue<string>): CheckState {
+    private getValue(attribute: EditableValue<string | boolean>): CheckState {
         const checked = ["checked", "_true", "true", "all"];
         const unchecked = ["unchecked", "_false", "false", "none"];
         const mixed = ["mixed", "partial", "some", "indeterminate"];
