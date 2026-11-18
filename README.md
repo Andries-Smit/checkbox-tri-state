@@ -6,8 +6,7 @@ Checkbox with three states; checked, unchecked and mixed.
 
 ## Features
 
-An easy way to select and deselect a set of boolean attributes. And allowing you to indicated when only some of the
-underling attributes are selected.
+An easy way to select and deselect a set of boolean attributes. And allowing you to indicated when only some of the underling attributes are selected.
 
 -   CSS styled checkbox, matching the standard checkbox.
 -   Intermediated or mixed state, to indicated partial selected options.
@@ -20,10 +19,7 @@ underling attributes are selected.
 
 Please note:
 
--   The change of the checkbox does only effect the enumeration attribute and does not automatically reflect to its
-    dependents, it requires an `On change` action.
-
-When Mendix 8.xx has support for editable data source we can add more flexibility to this widget.
+-   The change of the checkbox does only effect the enumeration attribute and does not automatically reflect to its dependents, it requires an `On change` action.
 
 ## Usage
 
