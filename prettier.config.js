@@ -1,13 +1,6 @@
-const base = require("./node_modules/@mendix/pluggable-widgets-tools/configs/prettier.base.json");
+const base = require("@mendix/pluggable-widgets-tools/configs/prettier.base.json");
 
 module.exports = {
     ...base,
-    overrides: [
-        {
-            files: "*.md",
-            options: {
-                proseWrap: "preserve"
-            }
-        }
-    ]
+    plugins: [require.resolve("@prettier/plugin-xml")],
 };

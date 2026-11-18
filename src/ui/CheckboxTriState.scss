@@ -1,7 +1,7 @@
 // Based on Mendix 8.6
 // theme\styles\web\sass\core\widgets\_checkbox.scss
 
-@import "_variables";
+@use "variables" as *;
 
 input[type="checkbox"].mx-widget-checkbox-tri-state {
     &:indeterminate::-ms-check {
